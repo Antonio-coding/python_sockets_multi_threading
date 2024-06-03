@@ -1,3 +1,5 @@
+
+
 import socket
 import threading
 
@@ -5,7 +7,8 @@ HEADER = 64
 PORT = 5050
 FORMAT = 'UTF-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
-SERVER = socket.gethostbyname(socket.gethostname())
+# SERVER = socket.gethostbyname(socket.gethostname())
+SERVER = "192.168.0.10" 
 ADDR = (SERVER, PORT)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -14,7 +17,7 @@ client.connect(ADDR)
 def receive_messages():
     while True:
         try:
-            msg = client.recv(2048).decode(FORMAT)
+            msg = client.recv(1024).decode(FORMAT)
             if msg:
                 print(msg)
         except:
@@ -32,6 +35,9 @@ def send(msg):
 
 receive_thread = threading.Thread(target=receive_messages)
 receive_thread.start()
+
+name = input("Enter your name: ")
+client.send(name.encode(FORMAT))
 
 print("Type your messages below:")
 while True:
