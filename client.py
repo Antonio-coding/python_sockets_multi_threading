@@ -8,7 +8,7 @@ PORT = 5050
 FORMAT = 'UTF-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 # SERVER = socket.gethostbyname(socket.gethostname())
-SERVER = "192.168.0.10" 
+SERVER = "192.168.0.187"
 ADDR = (SERVER, PORT)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -36,10 +36,10 @@ def send(msg):
 receive_thread = threading.Thread(target=receive_messages)
 receive_thread.start()
 
-name = input("Enter your name: ")
+name = input("Digite seu nome: ")
 client.send(name.encode(FORMAT))
 
-print("Type your messages below:")
+print("Digite suas mensagens abaixo:")
 while True:
     msg = input()
     send(msg)
